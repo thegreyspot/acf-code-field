@@ -172,17 +172,6 @@ class acf_code_field extends acf_field {
 		wp_enqueue_style( 'codemirror-curr-style', "{$dir}js/codemirror-5.13/theme/{$field['theme']}.css" );
 
 		?>
-
-		<script>
-			var code_field_<?php echo $safe_slug; ?> = document.getElementById('<?php echo $field[ 'id' ]; ?>');
-			var editor = CodeMirror.fromTextArea(code_field_<?php echo $safe_slug; ?>, {
-				lineNumbers: true,
-				mode       : '<?php echo esc_js($field[ 'mode' ]); ?>',
-				theme      : '<?php echo $field['theme']; ?>',
-				extraKeys  : {"Ctrl-Space": "autocomplete"},
-				value      : document.documentElement.innerHTML
-			});
-		</script>
 		<?php
 	}
 
@@ -210,6 +199,7 @@ class acf_code_field extends acf_field {
 		$dir = plugin_dir_url( __FILE__ );
 
 		// register & include JS
+		wp_enqueue_script( 'acf-input-code-field', "{$dir}js/input.js" );
 		wp_enqueue_script( 'acf-input-code-field-codemirror', "{$dir}js/codemirror-5.13/lib/codemirror.js" );
 		wp_enqueue_script( 'acf-input-code-field-codemirror-css', "{$dir}js/codemirror-5.13/mode/css/css.js" );
 		wp_enqueue_script( 'acf-input-code-field-codemirror-js', "{$dir}js/codemirror-5.13/mode/javascript/javascript.js" );
